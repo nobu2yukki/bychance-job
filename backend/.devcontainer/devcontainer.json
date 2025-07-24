@@ -1,0 +1,20 @@
+{
+  "name": "bychance-job-backend",
+  "dockerComposeFile": "../../compose.yaml",
+  "service": "backend",
+  "workspaceFolder": "/app",
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "terminal.integrated.defaultProfile.linux": "zsh",
+        "terminal.integrated.profiles.linux": {
+          "zsh": {
+            "path": "/bin/zsh"
+          }
+        }
+      },
+      "extensions": ["charliermarsh.ruff", "ms-python.python"]
+    }
+  },
+  "postCreateCommand": "bash .devcontainer/setup-terminal.sh"
+}
