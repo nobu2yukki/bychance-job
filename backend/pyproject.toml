@@ -1,0 +1,60 @@
+[tool.ruff]
+# Python version
+target-version = "py311"
+
+# ソースコードのディレクトリ
+src = ["src"]
+
+# 1行の最大文字数
+line-length = 88
+
+# 除外するディレクトリ
+exclude = [
+    ".git",
+    "__pycache__",
+    ".venv",
+    "venv",
+    ".env",
+    "build",
+    "dist",
+    ".pytest_cache",
+    ".mypy_cache",
+    ".ruff_cache",
+]
+
+[tool.ruff.lint]
+# 有効にするルール
+select = [
+    "E",    # pycodestyle errors
+    "W",    # pycodestyle warnings
+    "F",    # pyflakes
+    "N",    # pep8-naming
+    "I",    # isort
+    "B",    # flake8-bugbear
+    "UP",   # pyupgrade
+    "C90",  # mccabe
+    "TID",  # flake8-tidy-imports
+    "RUF",  # Ruff-specific rules
+]
+
+# 無視するルール
+ignore = [
+    "E501",  # line too long (handled by formatter)
+    "B008",  # do not perform function calls in argument defaults
+]
+
+# ファイルごとの除外設定
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = ["F401"]  # imported but unused
+
+[tool.ruff.lint.isort]
+# isortの設定
+combine-as-imports = true
+force-wrap-aliases = true
+
+[tool.ruff.format]
+# フォーマッターの設定
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false
+line-ending = "auto"
