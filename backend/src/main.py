@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from routers import question
+from routers import questions
 
 app = FastAPI()
 
