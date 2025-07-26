@@ -1,6 +1,7 @@
 from fastapi import APIRouter, Depends
 from pydantic import BaseModel
 from src.schemas.question import (
+    AnswerPayload,
     InitialQuestion,
     InitialQuestionNoCondition,
 )
@@ -156,3 +157,35 @@ def post_answers(
     session["question"] = answer_data.answers
 
     return {"message": "回答を受け取りました", "answers": answer_data.answers}
+
+
+###ユーロ式に出力するPOST
+@router.post("/questions/result", tags=["question"])
+def post_question_result(payload: AnswerPayload):
+    # ensure_session(session_id)
+
+    # デフォルト値の定義
+    result = {
+        "desired_job_category": None,
+        "previous_employment_history": [],
+        "user_filter_label": True,
+        "category_to_exclude": "parent",
+    }
+
+    answers = payload.answers
+
+    # マッピング定義
+    if 1 in answers:
+        result["desired_job_category"] = answers[1]
+    if 3 in answers:
+        result["previous_employment_history"] = answers[3]
+    if 4 in answers:
+        result["user_filter_label"] = True if answers[4] == "はい" else False
+    if 5 in answers:
+        result["category_to_exclude"] = "parent" if answers[5] == "はい" else "child"
+
+    # セッションに保存
+    # session = get_session_data(session_id)
+    # session["question"] = result
+
+    return result
