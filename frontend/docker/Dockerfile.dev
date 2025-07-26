@@ -1,12 +1,10 @@
 FROM oven/bun:latest
 
-WORKDIR /app
+WORKDIR /app/frontend
 
 COPY package*.json bun.lock* ./
 
 RUN bun install 
-
-COPY . .
 
 EXPOSE 3000
 

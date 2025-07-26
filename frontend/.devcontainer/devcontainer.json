@@ -2,15 +2,22 @@
   "name": "bychance-job-frontend",
   "dockerComposeFile": ["../../compose.yaml"],
   "service": "frontend",
-  "workspaceFolder": "/app",
+  "workspaceFolder": "/app/frontend",
+  "postAttachCommand": "git config --global --add safe.directory /app",
   "customizations": {
     "vscode": {
       "settings": {
+        "git.openRepositoryInParentFolders": "always",
         "terminal.integrated.defaultProfile.linux": "zsh",
         "terminal.integrated.profiles.linux": {
           "zsh": {
             "path": "/bin/zsh"
           }
+        },
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "biomejs.biome",
+        "editor.codeActionsOnSave": {
+          "source.organizeImports": "explicit"
         }
       },
       "extensions": ["biomejs.biome"]
