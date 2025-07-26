@@ -1,8 +1,8 @@
 'use client';
+import JobCard from '@/components/JobCard';
 import type { Job } from '@/types/jobs';
 import { createRef, useEffect, useMemo, useRef, useState } from 'react';
 import TinderCard from 'react-tinder-card';
-import JobCard from './JobCard';
 
 interface JobCardWrapperProps {
   jobs: Job[];
