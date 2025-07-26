@@ -4,6 +4,7 @@ export const sampleJobs: Job[] = [
   {
     id: 1,
     company_name: 'スターバックス 渋谷店',
+    page_url: 'https://www.starbucks.co.jp/store/detail/1234567890',
     description:
       'お客様への接客、コーヒーの提供、レジ操作などをお任せします。未経験の方も歓迎！充実した研修制度があります。明るく笑顔で接客できる方を募集しています。',
     salary: '1200-1400円/時',
@@ -19,6 +20,7 @@ export const sampleJobs: Job[] = [
   {
     id: 2,
     company_name: 'UNIQLO 新宿店',
+    page_url: 'https://www.uniqlo.com/jp/ja/store/detail/1234567890',
     description:
       'お客様への接客販売、商品整理、レジ業務をお願いします。ファッションが好きな方大歓迎！最新のトレンドを学びながら働けます。',
     salary: '1300-1500円/時',
@@ -39,6 +41,7 @@ export const sampleJobs: Job[] = [
   {
     id: 3,
     company_name: '株式会社テックソリューション',
+    page_url: 'https://www.techsolution.co.jp/job/1234567890',
     description:
       '簡単なデータ入力作業をお任せします。在宅勤務可能で、自分のペースで作業できます。Excel等の基本操作ができれば問題ありません。',
     salary: '1100-1200円/時',
@@ -59,6 +62,7 @@ export const sampleJobs: Job[] = [
   {
     id: 4,
     company_name: '個別指導塾ITTO',
+    page_url: 'https://www.itto.co.jp/job/1234567890',
     description:
       '小中高生への個別指導をお任せします。教える科目は相談可能。教育に興味のある方歓迎！生徒の成長を間近で感じられるやりがいのある仕事です。',
     salary: '1500-2000円/時',
@@ -79,6 +83,7 @@ export const sampleJobs: Job[] = [
   {
     id: 5,
     company_name: 'イベントプロダクション',
+    page_url: 'https://www.eventproduction.co.jp/job/1234567890',
     description:
       'コンサートやイベントの会場設営、案内業務をお願いします。単発から長期まで選べます。有名アーティストのイベントにも関われます！',
     salary: '1200-1500円/時',
@@ -99,6 +104,7 @@ export const sampleJobs: Job[] = [
   {
     id: 6,
     company_name: 'Uber Eats',
+    page_url: 'https://www.ubereats.com/job/1234567890',
     description:
       '自転車やバイクを使ったフードデリバリーのお仕事です。完全に自分のペースで働けて、頑張った分だけ稼げます！',
     salary: '1000-1800円/時',
@@ -119,6 +125,7 @@ export const sampleJobs: Job[] = [
   {
     id: 7,
     company_name: 'セブンイレブン 新宿西口店',
+    page_url: 'https://www.seven-eleven.co.jp/job/1234567890',
     description:
       'レジ業務、商品陳列、清掃等のコンビニ業務全般をお願いします。深夜帯は時給アップ！未経験でも丁寧に指導します。',
     salary: '1050-1350円/時',
@@ -139,6 +146,7 @@ export const sampleJobs: Job[] = [
   {
     id: 8,
     company_name: 'クリエイティブスタジオ',
+    page_url: 'https://www.creative-studio.co.jp/job/1234567890',
     description:
       'Webデザインのアシスタント業務をお任せします。Photoshop、Illustratorが使える方歓迎。実務経験を積みたい学生にもおすすめです。',
     salary: '1300-1600円/時',
@@ -159,6 +167,7 @@ export const sampleJobs: Job[] = [
   {
     id: 9,
     company_name: 'ペットランド',
+    page_url: 'https://www.petland.co.jp/job/1234567890',
     description:
       '可愛いペットたちのお世話と接客業務をお願いします。動物好きにはたまらないお仕事！ペットとの触れ合いで癒されながら働けます。',
     salary: '1100-1300円/時',
@@ -179,6 +188,7 @@ export const sampleJobs: Job[] = [
   {
     id: 10,
     company_name: 'ドミノピザ　浜松西伊場店',
+    page_url: 'https://www.dominos.co.jp/job/1234567890',
     description:
       '新作ゲームのテストプレイとバグ報告をお願いします。ゲーム好きにはたまらないお仕事！リリース前のゲームを一足先に体験できます。',
     salary: '1200-1400円/時',
