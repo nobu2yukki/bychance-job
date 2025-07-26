@@ -20,6 +20,50 @@ services:
     volumes:
       - .:/app
 
+  elasticsearch:
+       image: docker.elastic.co/elasticsearch/elasticsearch:8.8.2
+       hostname: elasticsearch
+       container_name: elasticsearch
+       environment:
+           - cluster.name=es-docker-cluster
+           - network.host=0.0.0.0
+           - node.name=es01
+           - cluster.initial_master_nodes=es01
+           - bootstrap.memory_lock=true
+           - "ES_JAVA_OPTS=-Xms128m -Xmx128m"
+           - xpack.security.enabled=false
+           - node.roles=master,data
+       ulimits:
+           memlock:
+               soft: -1
+               hard: -1
+       mem_limit: 1g
+       ports:
+           - "9200:9200/tcp"
+       volumes:
+           - elasticsearch-data:/usr/share/elasticsearch/data
+       
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:8.8.2
+    hostname: kibana
+    container_name: kibana
+    environment:
+        SERVER_NAME: "kibana"
+        ELASTICSEARCH_HOSTS: "http://erasticsearch:9200"
+        ELASTICSEARCH_REQUESTTIMEOUT: "60000"
+    ports:
+        - "5601:5601/tcp"
+    mem_limit: 1g
+    extra_hosts:
+        - "elasticsearch:172.30.10.3"
+    depends_on:
+        - elasticsearch
+
 networks:
   default:
     name: bychance-job-network
+
+volumes:
+  elasticsearch-data:
+    driver: local
