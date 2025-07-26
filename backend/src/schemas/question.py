@@ -11,3 +11,9 @@ class Question(BaseModel):
 # 回答の送信用
 class AnswerSubmission(BaseModel):
     answers: dict[int, str]
+
+
+class AnswerInput(BaseModel):
+    session_id: str
+    question_id: int
+    answer: str
