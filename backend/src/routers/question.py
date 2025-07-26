@@ -5,7 +5,7 @@ import json
 router = APIRouter()
 
 # ダミーデータ読み込み
-MOCK_PATH = Path(__file__).parent.parent / "mock_data" / "questions.json"
+MOCK_PATH = Path(__file__).parent.parent / "mock_data" / "dummy.json"
 with open(MOCK_PATH, encoding="utf-8") as f:
     QUESTIONS = json.load(f)
 
