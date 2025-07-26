@@ -4,9 +4,11 @@ import JobCardWrapper from '@/app/job-match/JobCardWrapper';
 import { sampleJobs } from '@/mock_data/jobs';
 import type { Job } from '@/types/jobs';
 import type { SwipeResult } from '@/types/swipe_results';
+import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 export default function Home() {
+  const router = useRouter();
   const [jobs, setJobs] = useState<Job[]>([]);
   const [swipeResult, setSwipeResult] = useState<SwipeResult>({
     good: [],
@@ -39,8 +41,10 @@ export default function Home() {
       return newSwipeResult;
     })();
     console.log(finalResult);
+    setTimeout(() => {
+      router.push('/job-suggestion');
+    }, 3000);
   };
-
 
   return (
     <main>
