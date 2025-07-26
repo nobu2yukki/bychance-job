@@ -6,8 +6,8 @@ services:
     ports:
       - "3000:3000"
     volumes:
-      - ./frontend:/app
-      - /app/node_modules
+      - .:/app
+      - /app/frontend/node_modules
     depends_on:
       - backend
 
@@ -18,7 +18,7 @@ services:
     ports:
       - "8000:8000"
     volumes:
-      - ./backend:/app
+      - .:/app
 
 networks:
   default:
