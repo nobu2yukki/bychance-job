@@ -36,3 +36,10 @@ class AnswerInput(BaseModel):
     session_id: str
     question_id: int
     answer: str
+
+
+from pydantic import BaseModel
+
+
+class AnswerPayload(BaseModel):
+    answers: dict[int, str | list[str]]
