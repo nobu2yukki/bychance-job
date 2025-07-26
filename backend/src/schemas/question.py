@@ -8,6 +8,25 @@ class Question(BaseModel):
     options: list[str]
 
 
+# class ShowCondition(BaseModel):
+#     condition: dict[str, str]
+
+
+class InitialQuestionNoCondition(BaseModel):
+    id: int
+    type: str
+    label: str
+    options: list
+
+
+class InitialQuestion(BaseModel):
+    id: int
+    type: str
+    label: str
+    options: list
+    showcondition: dict
+
+
 # 回答の送信用
 class AnswerSubmission(BaseModel):
     answers: dict[int, str]
