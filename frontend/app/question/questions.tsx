@@ -1,5 +1,6 @@
 'use client';
 
+import { useSession } from '@/contexts/SessionContext';
 import type { Question } from '@/types/question';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
@@ -10,6 +11,8 @@ type Props = {
 
 export const Questions = ({ questions }: Props) => {
   const router = useRouter();
+  const { sessionId } = useSession();
+
   //下、numberからstringへ
   const [answers, setAnswers] = useState<Record<string, string | string[]>>({});
   //下、numberからstringへ
@@ -30,7 +33,7 @@ export const Questions = ({ questions }: Props) => {
   };
 
   const handleSubmit = async () => {
-    const res = await fetch('/api/questions', {
+    const res = await fetch(`/api/questions?session_id=${sessionId}`, {
       method: 'POST',
       body: JSON.stringify({
         answers: answers,
