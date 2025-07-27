@@ -20,7 +20,10 @@ export async function POST(request: NextRequest) {
   });
   if (!res.ok) {
     console.log(res);
-    return;
+    return NextResponse.json(
+      { error: 'Failed to send question result' },
+      { status: 500 },
+    );
   }
   const result = await res.json();
   return NextResponse.json(result);
