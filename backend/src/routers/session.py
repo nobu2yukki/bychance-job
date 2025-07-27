@@ -29,9 +29,10 @@ def start_session():
         "swipe": {"target": [], "result": {"good": [], "bad": []}},
         "result": {"recommendations": []},
     }
-    return sessions
+    print(sessions)
+    return {"session_id": session_id}
 
 
 @router.get("/session/exists/{session_id}", tags=["session"])
 def check_session(session_id: str):
-    return {"session_id": session_id, "valid": session_id in active_sessions}
+    return {"session_id": session_id, "valid": session_id in sessions.keys()}

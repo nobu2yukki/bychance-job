@@ -1,11 +1,11 @@
 from fastapi import HTTPException, Query
 
 # routers/session.py の active_sessions を使いたい
-from src.routers.session import active_sessions
+from src.routers.session import sessions
 
 
 def is_valid_session(session_id: str) -> bool:
-    return session_id in active_sessions
+    return session_id in sessions
 
 
 def ensure_valid_session(session_id: str):

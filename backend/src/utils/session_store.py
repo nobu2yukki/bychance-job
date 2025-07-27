@@ -2,8 +2,10 @@
 
 from typing import Any
 
+from src.routers.session import sessions
+
 # セッションごとのデータ格納
-sessions: dict[str, dict[str, Any]] = {}
+# sessions: dict[str, dict[str, Any]] = {}
 
 
 def init_session(session_id: str):
@@ -17,7 +19,8 @@ def init_session(session_id: str):
 
 def ensure_session(session_id: str):
     """セッションが存在しなければ初期化"""
-    if session_id not in sessions:
+    print(sessions.keys())
+    if session_id not in sessions.keys():
         init_session(session_id)
 
 
