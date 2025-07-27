@@ -38,8 +38,5 @@ class AnswerInput(BaseModel):
     answer: str
 
 
-from pydantic import BaseModel
-
-
 class AnswerPayload(BaseModel):
-    answers: dict[int, str | list[str]]
+    answers: dict[str, str | list[str]]

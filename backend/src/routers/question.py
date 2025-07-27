@@ -7,6 +7,7 @@ from src.schemas.question import (
 )
 from src.utils.session import get_session_id
 from src.utils.session_store import ensure_session, get_session_data
+from src.utils.swipe_filtering.swipe_search import search_and_recommend_jobs
 
 router = APIRouter()
 
@@ -255,8 +256,10 @@ def post_answers(
 
 ###ユーロ式に出力するPOST
 @router.post("/questions/result", tags=["question"])
-def post_question_result(payload: AnswerPayload):
-    # ensure_session(session_id)
+def post_question_result(
+    payload: AnswerPayload, session_id: str = Depends(get_session_id)
+):
+    ensure_session(session_id)
 
     # デフォルト値の定義
     result = {
@@ -268,21 +271,29 @@ def post_question_result(payload: AnswerPayload):
     }
 
     answers = payload.answers
+    previous_employment_entries = []
 
     # マッピング定義
-    if 1 in answers:
-        result["desired_job_category"] = answers[1]
-    if 2 in answers:
-        result["previous_employment_label"] = False if answers[2] == "はい" else True
-    if 3 in answers:
-        result["previous_employment_history"] = answers[3]
-    if 4 in answers:
-        result["user_filter_label"] = True if answers[4] == "はい" else False
-    if 5 in answers:
-        result["category_to_exclude"] = "parent" if answers[5] == "はい" else "child"
+    if "1" in answers:
+        result["desired_job_category"] = answers["1"]
+    if "2" in answers:
+        result["previous_employment_label"] = False if answers["2"] == "はい" else True
+    if "3" in answers:
+        previous_employment_entries.append(answers["3"])
+    if "4" in answers:
+        previous_employment_entries.append(answers["4"])
+    if "5" in answers:
+        result["user_filter_label"] = True if answers["4"] == "はい" else False
+    if "6" in answers:
+        result["category_to_exclude"] = "parent" if answers["5"] == "はい" else "child"
+    result["previous_employment_history"] = previous_employment_entries
 
     # セッションに保存
-    # session = get_session_data(session_id)
-    # session["question"] = result
+    session = get_session_data(session_id)
+    session["question"] = result
 
-    return result
+    print(result)
+    recommended_jobs = search_and_recommend_jobs(result, target_results=20)
+    session["swipe"]["target"] = recommended_jobs
+    print(recommended_jobs)
+    return {"message": "回答を受け取りました", "answers": answers}

@@ -1,0 +1,38 @@
+{
+    "docs": [
+        {
+            "_index": "library",
+            "_id": "1",
+            "_version": 1,
+            "_seq_no": 0,
+            "_primary_term": 1,
+            "found": true,
+            "_source": {
+                "title": "情報検索と機械学習",
+                "name": {
+                    "first": "Kanada",
+                    "last": "yuro"
+                },
+                "publish_date": "2002-08-11T00:00:00+0900",
+                "price": 19.95
+            }
+        },
+        {
+            "_index": "library",
+            "_id": "2",
+            "_version": 2,
+            "_seq_no": 2,
+            "_primary_term": 1,
+            "found": true,
+            "_source": {
+                "title": "金田と田中",
+                "name": {
+                    "first": "Kanada",
+                    "last": "yuro"
+                },
+                "publish_date": "2002-08-11T00:00:00+0900",
+                "price": 19.95
+            }
+        }
+    ]
+}
