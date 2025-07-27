@@ -1,18 +1,20 @@
 'use client';
 
-import { useState } from 'react';
-import Link from 'next/link';
 import type { Question } from '@/types/question';
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 
 type Props = {
   questions: Question[];
 };
 
 export const Questions = ({ questions }: Props) => {
+  const router = useRouter();
   const [answers, setAnswers] = useState<Record<number, string | string[]>>({});
 
   const handleSingleChoice = (questionId: number, value: string) => {
     setAnswers(prev => ({ ...prev, [questionId]: value }));
+    console.log(answers);
   };
 
   const handleMultiChoice = (questionId: number, value: string) => {
@@ -23,6 +25,19 @@ export const Questions = ({ questions }: Props) => {
         : [...current, value];
       return { ...prev, [questionId]: updated };
     });
+    console.log(answers);
+  };
+
+  const handleSubmit = async () => {
+    const res = await fetch('/api/questions', {
+      method: 'POST',
+      body: JSON.stringify(answers),
+    });
+    console.log(res);
+    if (res.ok) {
+      router.push('/job-match');
+    }
+    console.error('Failed to submit questionnaire');
   };
 
   const shouldShowQuestion = (question: Question): boolean => {
@@ -69,14 +84,11 @@ export const Questions = ({ questions }: Props) => {
           </div>
         </div>
       ))}
-      
+
       <div className='mt-8 text-center'>
-        <Link 
-          href='/job-match'
-          className='inline-block px-6 py-3 bg-blue-500 text-white font-medium rounded-md hover:bg-blue-600 transition-colors'
-        >
+        <button type='submit' onClick={handleSubmit}>
           求人マッチングを開始
-        </Link>
+        </button>
       </div>
     </div>
   );
