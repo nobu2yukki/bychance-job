@@ -1,3 +1,4 @@
+import ClientProviders from "@/components/ClientProviders";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
@@ -27,17 +28,19 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <div className="mobile-only">
-          {children}
-        </div>
-        <div className="desktop-only">
-          <div className="flex items-center justify-center min-h-screen bg-gray-100">
-            <div className="text-center p-8 bg-white rounded-lg shadow-lg">
-              <h1 className="text-2xl font-bold mb-4">📱 スマートフォンでアクセスしてください</h1>
-              <p className="text-gray-600">このアプリはスマートフォン専用です。<br />スマートフォンからアクセスしてご利用ください。</p>
+        <ClientProviders>
+          <div className="mobile-only">
+            {children}
+          </div>
+          <div className="desktop-only">
+            <div className="flex items-center justify-center min-h-screen bg-gray-100">
+              <div className="text-center p-8 bg-white rounded-lg shadow-lg">
+                <h1 className="text-2xl font-bold mb-4">📱 スマートフォンでアクセスしてください</h1>
+                <p className="text-gray-600">このアプリはスマートフォン専用です。<br />スマートフォンからアクセスしてご利用ください。</p>
+              </div>
             </div>
           </div>
-        </div>
+        </ClientProviders>
       </body>
     </html>
   );
