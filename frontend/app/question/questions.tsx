@@ -32,13 +32,16 @@ export const Questions = ({ questions }: Props) => {
   const handleSubmit = async () => {
     const res = await fetch('/api/questions', {
       method: 'POST',
-      body: JSON.stringify(answers),
+      body: JSON.stringify({
+        answers: answers,
+      }),
     });
     console.log(res);
     if (res.ok) {
       router.push('/job-match');
+    } else {
+      console.error('Failed to submit questionnaire');
     }
-    console.error('Failed to submit questionnaire');
   };
 
   const shouldShowQuestion = (question: Question): boolean => {
