@@ -34,15 +34,10 @@ def get_swipe_jobs(session_id: str = Depends(get_session_id)):
 def post_swipe_results(result: SwipeResult):
     ensure_session(result.session_id)
     session = get_session_data(result.session_id)
-    print(result)
-    print(result.good)
-    print(session["swipe"]["target"])
     # 保存されたJob一覧からID検索用辞書を作成
     job_dict = {job.id: job for job in session["swipe"]["target"]}
-    print(job_dict)
     good_jobs = [job_dict[jid] for jid in result.good if jid in job_dict]
     bad_jobs = [job_dict[jid] for jid in result.bad if jid in job_dict]
-    print(good_jobs)
     session["swipe"]["result"]["good"] = good_jobs
     session["swipe"]["result"]["bad"] = bad_jobs
     print(session["swipe"]["result"]["good"])
