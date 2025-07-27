@@ -1,7 +1,7 @@
 'use client';
 
 import JobCardWrapper from '@/app/job-match/JobCardWrapper';
-import { sampleJobs } from '@/mock_data/jobs';
+import { useSession } from '@/contexts/SessionContext';
 import type { Job } from '@/types/jobs';
 import type { SwipeResult } from '@/types/swipe_results';
 import { useRouter } from 'next/navigation';
@@ -15,14 +15,28 @@ export default function Home() {
     bad: [],
   });
 
+  const { sessionId } = useSession();
+
   useEffect(() => {
-    // TODO: data fetch
     const fetchJobs = async () => {
-      console.log(sampleJobs);
-      return sampleJobs;
+      try {
+        const res = await fetch(`/api/swipe-list?session_id=${sessionId}`);
+        const swipe_list = await res.json();
+        return swipe_list;
+      } catch (error) {
+        alert('Failed to get swipe list');
+        router.push('/');
+        return;
+      }
     };
-    fetchJobs().then(jobs => setJobs(jobs));
-  }, []);
+
+    fetchJobs().then(jobs => {
+      if (jobs) { // jobsが存在する場合のみsetJobsを実行
+        setJobs(jobs);
+      }
+    });
+  }, [sessionId, router]);
+
 
   const handleSwipe = (jobId: number, status: 'good' | 'bad') => {
     console.log(jobId, status);
@@ -34,13 +48,28 @@ export default function Home() {
   };
 
   // データの送信
-  const handleComplete = (jobId: number, status: 'good' | 'bad') => {
+  const handleComplete = async (jobId: number, status: 'good' | 'bad') => {
     const finalResult = (() => {
       const newSwipeResult = { ...swipeResult };
       newSwipeResult[status] = [...newSwipeResult[status], jobId];
       return newSwipeResult;
     })();
-    console.log(finalResult);
+
+    const body = {
+      session_id: sessionId,
+      ...finalResult
+    }
+    const res = await fetch(`/api/swipe-result`, {
+      method: 'POST',
+      body: JSON.stringify(body),
+    });
+
+    if (!res.ok) {
+      alert('Failed to send swipe result');
+      router.push('/');
+      return;
+    }
+
     setTimeout(() => {
       router.push('/job-suggestion');
     }, 3000);
