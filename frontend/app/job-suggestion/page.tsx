@@ -3,29 +3,39 @@
 import { Accordion } from "@/components/Accordion";
 import JobCard from "@/components/JobCard";
 import RankCrown from "@/components/RankCrown";
-import { sampleJobs } from "@/mock_data/jobs";
+import { useSession } from "@/contexts/SessionContext";
 import type { Job } from "@/types/jobs";
+import type { Result } from "@/types/results";
 import type { SwipeResultWithJob } from "@/types/swipe_results";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
-
 export default function Home() {
+  const [result, setResult] = useState<Result>();
   const [suggestJobs, setSuggestJobs] = useState<Job[]>([]);
   const [choicedJob, setChoicedJob] = useState<SwipeResultWithJob>();
+  const { sessionId } = useSession();
+  const router = useRouter();
+
   useEffect(() => {
-    const fetchSuggestJobs = async () => {
-      return sampleJobs
-    }
-    fetchSuggestJobs().then(jobs => setSuggestJobs(jobs));
-    const fetchChoicedJob = async () => {
-      return {
-        good: sampleJobs.slice(0, 3),
-        bad: sampleJobs.slice(3, 6)
+    const fetchResult = async () => {
+      try {
+        const res = await fetch(`/api/results?session_id=${sessionId}`);
+        const data = await res.json();
+        setResult(data);
+      } catch (error) {
+        alert('Failed to get result');
+        router.push('/');
       }
     }
-    fetchChoicedJob().then(jobs => setChoicedJob(jobs));
-  }, []);
+    fetchResult()
+    setSuggestJobs(result?.recommend || []);
+    setChoicedJob({
+      good: result?.good || [],
+      bad: result?.bad || []
+    });
+  }, [sessionId, router, result]);
 
   return (
     <main className="min-h-screen bg-gray-50">
@@ -37,17 +47,17 @@ export default function Home() {
           あなたにマッチした求人数の一覧
         </p>
         {choicedJob && (
-          <Accordion items={[{ title: '🙆 あなたが興味のある求人', content: choicedJob.good.map((job) => <JobCard key={job.id} job={job} />) }]} allowMultiple={false} />
+          <Accordion items={[{ title: '🙆 あなたが興味のある求人', content: choicedJob.good.map((job) => <JobCard key={`good-${job.id}`} job={job} />) }]} allowMultiple={false} />
         )}
-        {choicedJob && (
-          <Accordion items={[{ title: '🙅 あなたの興味のない求人', content: choicedJob.bad.map((job) => <JobCard key={job.id} job={job} />) }]} allowMultiple={false} />
+        {choicedJob && choicedJob.bad.length > 0 && (
+          <Accordion items={[{ title: '🙅 あなたの興味のない求人', content: choicedJob.bad.map((job) => <JobCard key={`bad-${job.id}`} job={job} />) }]} allowMultiple={false} />
         )}
         <hr className="my-4" />
         <div className="space-y-4 sm:space-y-6 mb-8">
           {suggestJobs.map((job, rank: number) => (
-            <div key={job.id} className="flex flex-col gap-2">
+            <div key={`suggest-${job.id}`} className="flex flex-col gap-2">
               <RankCrown rank={rank + 1} size={36} />
-              <JobCard key={job.id} job={job} />
+              <JobCard job={job} />
             </div>
           ))}
         </div>
