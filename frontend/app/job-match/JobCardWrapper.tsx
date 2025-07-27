@@ -38,7 +38,9 @@ export default function JobCardWrapper({
   }, []);
 
   useEffect(() => {
-    setCurrentIndex(jobs.length - 1);
+    if (jobs.length > 0) {
+      setCurrentIndex(jobs.length - 1);
+    }
   }, [jobs]);
 
   // カードのインデックスを更新する関数
