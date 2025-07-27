@@ -167,6 +167,7 @@ def post_question_result(payload: AnswerPayload):
     # デフォルト値の定義
     result = {
         "desired_job_category": None,
+        "previous_employment_label": False,
         "previous_employment_history": [],
         "user_filter_label": True,
         "category_to_exclude": "parent",
@@ -177,6 +178,8 @@ def post_question_result(payload: AnswerPayload):
     # マッピング定義
     if 1 in answers:
         result["desired_job_category"] = answers[1]
+    if 2 in answers:
+        result["previous_employment_label"] = False if answers[2] == "はい" else True
     if 3 in answers:
         result["previous_employment_history"] = answers[3]
     if 4 in answers:
