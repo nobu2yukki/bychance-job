@@ -13,10 +13,15 @@ export async function GET() {
 }
 
 export async function POST(request: NextRequest) {
+  const body = await request.json();
+  console.log(body);
   const domain = process.env.BACKEND_URL;
   const res = await fetch(`${domain}/questions/result`, {
     method: 'POST',
-    body: JSON.stringify(request.json()),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(body),
   });
   if (!res.ok) {
     console.log(res);
