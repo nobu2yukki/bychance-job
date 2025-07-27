@@ -10,14 +10,15 @@ type Props = {
 
 export const Questions = ({ questions }: Props) => {
   const router = useRouter();
-  const [answers, setAnswers] = useState<Record<number, string | string[]>>({});
-
-  const handleSingleChoice = (questionId: number, value: string) => {
+  //下、numberからstringへ
+  const [answers, setAnswers] = useState<Record<string, string | string[]>>({});
+  //下、numberからstringへ
+  const handleSingleChoice = (questionId: string, value: string) => {
     setAnswers(prev => ({ ...prev, [questionId]: value }));
     console.log(answers);
   };
-
-  const handleMultiChoice = (questionId: number, value: string) => {
+  //下、numberからstringへ
+  const handleMultiChoice = (questionId: string, value: string) => {
     setAnswers(prev => {
       const current = (prev[questionId] as string[]) || [];
       const updated = current.includes(value)
