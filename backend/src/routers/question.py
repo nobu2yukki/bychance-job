@@ -100,7 +100,7 @@ def get_init_question5():
 def get_all_questions():
     question_list = [
         {
-            "id": 1,
+            "id": "1",
             "type": "choice",
             "label": "希望職種を一つ選んでください",
             "options": [
@@ -114,13 +114,13 @@ def get_all_questions():
             ],
         },
         {
-            "id": 2,
+            "id": "2",
             "type": "choice",
             "label": "過去にアルバイト経験はありますか？",
             "options": ["はい", "いいえ"],
         },
         {
-            "id": 3,
+            "id": "3",
             "type": "choice",
             "label": "過去に経験のある職種（大カテゴリ）を一つ選んでください",
             "options": [
@@ -132,17 +132,17 @@ def get_all_questions():
                 "軽作業・倉庫",
                 "事務・在宅",
             ],
-            "showCondition": {"questionId": 2, "selectedValue": "はい"},
+            "showCondition": {"questionId": "2", "selectedValue": "はい"},
         },
         {
-            "id": 4,
+            "id": "4",
             "type": "choice",
             "label": "過去に経験のあるイベント系職種を一つ選んでください",
             "options": ["アンケート調査", "交通整備", "展示会", "音楽フェス"],
-            "showCondition": {"questionId": 3, "selectedValue": "イベント"},
+            "showCondition": {"questionId": "3", "selectedValue": "イベント"},
         },
         {
-            "id": 5,
+            "id": "5",
             "type": "choice",
             "label": "過去に経験のある飲食系の職種を一つ選んでください",
             "options": [
@@ -156,10 +156,10 @@ def get_all_questions():
                 "給食",
                 "飲食店",
             ],
-            "showCondition": {"questionId": 3, "selectedValue": "飲食"},
+            "showCondition": {"questionId": "3", "selectedValue": "飲食"},
         },
         {
-            "id": 6,
+            "id": "6",
             "type": "choice",
             "label": "過去に経験のある販売・接客系の職種を一つ選んでください",
             "options": [
@@ -182,49 +182,49 @@ def get_all_questions():
                 "美容室",
                 "葬儀場",
             ],
-            "showCondition": {"questionId": 3, "selectedValue": "販売・接客"},
+            "showCondition": {"questionId": "3", "selectedValue": "販売・接客"},
         },
         {
-            "id": 7,
+            "id": "7",
             "type": "choice",
             "label": "過去に経験のある医療・福祉系の職種を一つ選んでください",
             "options": ["介護補助", "医療事務", "訪問介護"],
-            "showCondition": {"questionId": 3, "selectedValue": "医療・福祉"},
+            "showCondition": {"questionId": "3", "selectedValue": "医療・福祉"},
         },
         {
-            "id": 8,
+            "id": "8",
             "type": "choice",
             "label": "過去に経験のある教育・保育系の職種を一つ選んでください",
             "options": ["保育", "保育補助", "塾", "家庭教師"],
-            "showCondition": {"questionId": 3, "selectedValue": "教育・保育"},
+            "showCondition": {"questionId": "3", "selectedValue": "教育・保育"},
         },
         {
-            "id": 9,
+            "id": "9",
             "type": "choice",
             "label": "過去に経験のある軽作業・倉庫系の職種を一つ選んでください",
             "options": ["仕分け", "品出し", "引っ越し", "清掃", "農業補助"],
-            "showCondition": {"questionId": 3, "selectedValue": "軽作業・倉庫"},
+            "showCondition": {"questionId": "3", "selectedValue": "軽作業・倉庫"},
         },
         {
-            "id": 10,
+            "id": "10",
             "type": "choice",
             "label": "過去に経験のある事務・在宅系の職種を一つ選んでください",
             "options": ["データ入力", "在宅ワーク"],
-            "showCondition": {"questionId": 3, "selectedValue": "事務・在宅"},
+            "showCondition": {"questionId": "3", "selectedValue": "事務・在宅"},
         },
         {
-            "id": 11,
+            "id": "11",
             "type": "choice",
             "label": "求人情報の推薦に、過去に経験のある職種を含めますか？",
             "options": ["はい", "いいえ"],
-            "showCondition": {"questionId": 2, "selectedValue": "はい"},
+            "showCondition": {"questionId": "2", "selectedValue": "はい"},
         },
         {
-            "id": 12,
+            "id": "12",
             "type": "coice",
             "label": "求人情報の推薦に、同じ業種の求人情報を含めますか？",
             "options": ["はい", "いいえ"],
-            "showCondition": {"questionId": 2, "selectedValue": "はい"},
+            "showCondition": {"questionId": "2", "selectedValue": "はい"},
         },
     ]
     return question_list
