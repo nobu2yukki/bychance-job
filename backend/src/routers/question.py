@@ -264,7 +264,7 @@ def post_question_result(
     # デフォルト値の定義
     result = {
         "desired_job_category": None,
-        "previous_employment_label": False,
+        "previous_employment_label": True,
         "previous_employment_history": [],
         "user_filter_label": True,
         "category_to_exclude": "parent",
@@ -277,13 +277,13 @@ def post_question_result(
     if "1" in answers:
         result["desired_job_category"] = answers["1"]
     if "2" in answers:
-        result["previous_employment_label"] = False if answers["2"] == "はい" else True
+        result["previous_employment_label"] = True if answers["2"] == "はい" else False
     if "3" in answers:
         previous_employment_entries.append(answers["3"])
     if "4" in answers:
         previous_employment_entries.append(answers["4"])
     if "5" in answers:
-        result["user_filter_label"] = True if answers["4"] == "はい" else False
+        result["user_filter_label"] = False if answers["4"] == "はい" else True
     if "6" in answers:
         result["category_to_exclude"] = "parent" if answers["5"] == "はい" else "child"
     result["previous_employment_history"] = previous_employment_entries
@@ -292,7 +292,6 @@ def post_question_result(
     session = get_session_data(session_id)
     session["question"] = result
 
-    print(result)
     recommended_jobs = search_and_recommend_jobs(result, target_results=20)
     session["swipe"]["target"] = recommended_jobs
     print(recommended_jobs)
