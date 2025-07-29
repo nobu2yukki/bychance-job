@@ -17,25 +17,24 @@ export default function Home() {
   const [choicedJob, setChoicedJob] = useState<SwipeResultWithJob>();
   const { sessionId } = useSession();
   const router = useRouter();
-
   useEffect(() => {
     const fetchResult = async () => {
       try {
         const res = await fetch(`/api/results?session_id=${sessionId}`);
         const data = await res.json();
         setResult(data);
-      } catch (error) {
-        alert('Failed to get result');
-        router.push('/');
-      }
+      setSuggestJobs(data?.recommend || []);
+      setChoicedJob({
+        good: data?.good || [],
+        bad: data?.bad || []
+      });
+    } catch (error) {
+      alert('Failed to get result');
+      router.push('/');
     }
-    fetchResult()
-    setSuggestJobs(result?.recommend || []);
-    setChoicedJob({
-      good: result?.good || [],
-      bad: result?.bad || []
-    });
-  }, [sessionId, router, result]);
+  }
+  fetchResult()
+  }, [sessionId, router]);
 
   return (
     <main className="min-h-screen bg-gray-50">
