@@ -40,6 +40,10 @@
    - 初回起動時は自動的にコンテナがビルドされます
    - Docker Composeで定義されたサービスが起動します
 
+5. **開発開始**
+    - コンテナ内でターミナルを開き、必要なコマンドを実行できます
+    - 例えば、Frontendでは`bun dev`、Backendでは`uvicorn src.main:app --host 0.0.0.0 --reload`など
+
 #### Dev Container の特徴
 
 **共通機能：**
