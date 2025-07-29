@@ -2,33 +2,33 @@ import type { Question } from '@/types/question';
 
 export const questions: Question[] = [
   {
-    id: 1,
+    id: '1',
     type: 'choice',
     label: '希望職種を選んでください',
     options: ['イベント', '飲食', '接客', '医療・福祉'],
   },
   {
-    id: 2,
+    id: '2',
     type: 'choice',
     label: '過去にアルバイト経験はありますか？',
     options: ['はい', 'いいえ'],
   },
   {
-    id: 3,
+    id: '3',
     type: 'multi',
     label: '過去に経験のある職種を選んでください',
     options: ['イベント', '飲食', '接客'],
     showCondition: { questionId: 2, selectedValue: 'はい' },
   },
   {
-    id: 4,
+    id: '4',
     type: 'choice',
     label: '求人情報の推薦に、過去に経験のある職種を含めますか？',
     options: ['はい', 'いいえ'],
     showCondition: { questionId: 2, selectedValue: 'はい' },
   },
   {
-    id: 5,
+    id: '5',
     type: 'coice',
     label: '求人情報の推薦に、同じ業種の求人情報を含めますか？',
     options: ['はい', 'いいえ'],
